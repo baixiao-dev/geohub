@@ -111,7 +111,7 @@ export default function ContentsPage() {
           <div className="flex flex-col sm:flex-row gap-4">
             <Select
               value={selectedBusinessId}
-              onValueChange={(value: string) => setSelectedBusinessId(value || '')}
+              onValueChange={(value: string | null) => setSelectedBusinessId(value || '')}
             >
               <SelectTrigger className="w-[200px]">
                 <SelectValue placeholder="选择店铺" />
@@ -127,7 +127,7 @@ export default function ContentsPage() {
 
             <Select
               value={contentType}
-              onValueChange={(value: string) => setContentType(value || '')}
+              onValueChange={(value: string | null) => setContentType(value || '')}
             >
               <SelectTrigger className="w-[200px]">
                 <SelectValue placeholder="选择内容类型" />
