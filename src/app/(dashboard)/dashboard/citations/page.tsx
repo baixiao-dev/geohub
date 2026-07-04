@@ -129,7 +129,7 @@ export default function CitationsPage() {
         <div className="flex gap-4 items-center">
           <Select
             value={selectedBusinessId}
-            onValueChange={(value: string) => setSelectedBusinessId(value || '')}
+            onValueChange={(value: string | null) => setSelectedBusinessId(value || '')}
           >
             <SelectTrigger className="w-[200px]">
               <SelectValue placeholder="选择店铺" />
@@ -144,8 +144,10 @@ export default function CitationsPage() {
           </Select>
           <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger>
-  <Plus className="mr-2 h-4 w-4" /> 添加证据
-</DialogTrigger>
+              <Button>
+                <Plus className="mr-2 h-4 w-4" /> 添加证据
+              </Button>
+            </DialogTrigger>
             <DialogContent>
               <DialogHeader>
                 <DialogTitle>添加 AI 引用证据</DialogTitle>
@@ -154,7 +156,7 @@ export default function CitationsPage() {
                 <div className="space-y-4 py-4">
                   <div className="space-y-2">
                     <Label>AI 平台</Label>
-                    <Select value={formPlatform} onValueChange={(value: string) => setFormPlatform(value)}>
+                    <Select value={formPlatform} onValueChange={(value: string | null) => setFormPlatform(value || '')}>
                       <SelectTrigger>
                         <SelectValue placeholder="选择平台" />
                       </SelectTrigger>
