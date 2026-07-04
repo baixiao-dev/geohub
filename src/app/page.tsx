@@ -3,7 +3,7 @@
 export default function HomePage() {
   return (
     <div className="min-h-screen flex flex-col">
-      {/* 导航栏 */}
+      {/* 导航栏 - 这部分正常，保持不变 */}
       <header className="border-b py-4 px-6 flex justify-between items-center">
         <h1 className="text-2xl font-bold">GeoHub</h1>
         <nav className="flex gap-4">
@@ -26,11 +26,13 @@ export default function HomePage() {
             一站式 AI GEO 营销平台，优化您的商家信息在 ChatGPT、豆包、Kimi、DeepSeek 等 AI 平台中的可见度与推荐表现。
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            {/* 开始优化按钮 - 使用和导航栏相同的跳转方式 */}
             <a href="/dashboard">
               <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-lg text-lg w-full sm:w-auto">
                 开始优化
               </button>
             </a>
+            {/* 了解更多按钮 - 跳转到功能介绍 */}
             <a href="/dashboard/businesses">
               <button className="border border-gray-300 hover:bg-gray-50 font-medium py-3 px-8 rounded-lg text-lg w-full sm:w-auto">
                 管理店铺
