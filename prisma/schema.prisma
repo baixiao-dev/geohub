@@ -1,0 +1,79 @@
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// 1. 店铺表
+model Business {
+  id            String   @id @default(cuid())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  name          String   @db.VarChar(255)
+  city          String   @db.VarChar(100)
+  category      String   @db.VarChar(100)
+  phone         String?  @db.VarChar(50)
+  businessHours String?  @db.Text
+  
+  images        Json?    @default("[]")
+  features      Json?    @default("[]")
+  socialLinks   Json?    @default("{}")
+
+  reports       AnalysisReport[]
+  contents      GeneratedContent[]
+  citations     AiCitation[]
+}
+
+// 2. AI 分析报告表
+model AnalysisReport {
+  id            String   @id @default(cuid())
+  createdAt     DateTime @default(now())
+  
+  businessId    String
+  business      Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  totalScore    Int      @default(0)
+  geoScore      Int      @default(0)
+  seoScore      Int      @default(0)
+
+  issues        Json     @default("[]")
+  suggestions   Json     @default("[]")
+  aiSummary     String?  @db.Text
+  analyzedKeyword String? @db.VarChar(255)
+}
+
+// 3. 生成内容库
+model GeneratedContent {
+  id            String   @id @default(cuid())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  businessId    String
+  business      Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  type          String   @db.VarChar(50)
+  title         String?  @db.VarChar(255)
+  content       String   @db.Text
+  status        String   @default("draft")
+  metaData      Json?    @default("{}")
+}
+
+// 4. AI 引用证据表
+model AiCitation {
+  id            String   @id @default(cuid())
+  createdAt     DateTime @default(now())
+
+  businessId    String
+  business      Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  platform      String   @db.VarChar(50)
+  queryKeyword  String   @db.VarChar(255)
+  screenshotUrl String?  @db.Text
+  citationDate  DateTime @default(now())
+  status        String   @default("pending")  // pending | verified | published
+}
