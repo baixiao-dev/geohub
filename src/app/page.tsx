@@ -17,7 +17,7 @@ export default function HomePage() {
         </nav>
       </header>
 
-      {/* 主内容区 */}
+      {/* 主内容 */}
       <main className="flex-1 flex items-center justify-center p-6">
         <div className="text-center max-w-2xl">
           <h2 className="text-4xl font-bold mb-4">
